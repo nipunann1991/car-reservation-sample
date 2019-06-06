@@ -1,0 +1,45 @@
+
+
+.login{
+	width: 450px;
+	margin: auto;
+}
+
+.create_account{
+	width: 600px;
+}
+
+.login .login_inner{
+	padding: 25px;
+    border: 1px #cbcbcb solid;
+    border-radius: 5px;
+}
+
+.login h1{
+	font-size: 30px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.login button{
+	width: 100%;
+	margin-top: 15px;
+}
+
+label.error{
+	margin-top: 5px;
+	margin-bottom: 0;
+	font-size: 13px;
+	color: #ff0000;
+}
+
+.create_account_link{
+	margin-top: 10px;
+	display: block;
+	text-align: center;
+}
+
+.create_account_link a{
+	margin-left: 5px;
+}
