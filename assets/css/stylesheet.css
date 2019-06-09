@@ -43,3 +43,81 @@ label.error{
 .create_account_link a{
 	margin-left: 5px;
 }
+
+.navbar {
+	padding: 0 1rem;
+}
+
+.navbar .nav-link { 
+    padding: 1rem 1.5rem !important;
+}
+
+.navbar .nav-link:hover{ 
+    background: #5d5d5d;
+}  
+
+.user_name{  
+    border-left: 1px #555 solid; 
+}
+
+.navbar .user_name a:hover{ 
+	color: #ffffff;
+	background: transparent;
+}
+
+.navbar .user_name a{ 
+	padding: 1rem !important;
+}
+
+.nav-item:last-child{ 
+	display: flex; 
+	align-items: center;
+}
+
+.navbar-nav .dropdown-menu{
+	background-color: #343a40;  
+	margin-top: 0;
+}
+
+.dropdown-item{
+	color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+	color: #ffffff; 
+}
+
+.dropdown-item:hover{
+	color: #ffffff;
+	background: #5d5d5d;
+}
+
+.page{
+	padding: 30px 0;
+}
+
+.page .top-header{
+	overflow: hidden;
+	width: 100%; 
+	margin-bottom: 20px;
+}
+
+.page .top-header h2{
+	font-size: 26px;
+	font-weight: 700;
+	float: left;
+}
+
+.page .top-header a{
+	float: right;
+}
+
+.page .edit_item{
+	margin-right: 10px;
+}
+
+
+.editable_table tbody tr td:last-child a{
+	/*text-align: center;*/
+	font-size: 14px;
+}

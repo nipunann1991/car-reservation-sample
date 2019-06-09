@@ -5,5 +5,6 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/stylesheet.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.min.css">
 </head>
 <body>
