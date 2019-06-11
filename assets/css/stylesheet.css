@@ -22,6 +22,10 @@
 	text-align: center;
 }
 
+.padding0{
+	padding: 0;
+}
+
 .login button{
 	width: 100%;
 	margin-top: 15px;
@@ -81,6 +85,11 @@ label.error{
 
 .dropdown-item{
 	color: #ffffff;
+}
+
+.box_form{
+	padding: 25px;
+    border: 1px #e1e1e1 solid;
 }
 
 .navbar-dark .navbar-nav .nav-link{

@@ -8,7 +8,7 @@
 
 
 
-<div class="container-fluid">  
+<div class="container-fluid page">  
 
 	<div class="container"> 
 		

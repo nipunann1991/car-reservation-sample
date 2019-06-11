@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class login_model extends CI_Model {
 
-	public function registration($data)
-	{
+	public function registration($data){
  
 		$values = "'" . implode("','", $data) . "'";
 
@@ -20,8 +19,7 @@ class login_model extends CI_Model {
 			return "Data Inserted Faild";
 
 		}
-
-	
+ 
 	}
 
 	public function select_registerd_users(){

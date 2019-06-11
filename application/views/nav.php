@@ -16,7 +16,7 @@
 		      	</a>
 		      	<div class="dropdown-menu">
 		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/view_cars">View Cars</a> 
-		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/car_types">Car Types</a> 
+		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/view_car_types">Car Types</a> 
 		        	<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/add_car">Add/Remove Cars</a> 
 		      	</div>
 		    </li>
