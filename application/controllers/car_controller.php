@@ -33,6 +33,11 @@ class car_controller extends CI_Controller {
 		$this->load->view('cars/view_cars');
 	}
 
+
+	public function edit_car(){
+		$this->load->view('cars/edit_car');
+	}
+
 	
 
 	public function check_user_details(){
@@ -130,7 +135,94 @@ class car_controller extends CI_Controller {
   
 	}
 
-	
+
+	public function get_all_fuel_types_data(){   
+
+		$result = $this->car_model->get_all_fuel_types(); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+
+	public function add_car_data(){  
+
+		$data = array(
+			'plate_id' => $this->input->post('plate_id'),
+			'model' => $this->input->post('model'),
+			'car_type_id' => $this->input->post('car_type'),
+			'color' => $this->input->post('color'),
+			'year' => $this->input->post('year'),
+			'engine' => $this->input->post('engine'), 
+			'fuel_type_id' => $this->input->post('fuel_types'),
+		);
+
+		$result = $this->car_model->insert_car_data($data); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+
+	public function edit_car_data(){  
+
+		$data_vals = array(
+			'car_id' => $this->input->post('car_id'),
+			'plate_id' => $this->input->post('plate_id'),
+			'model' => $this->input->post('model'),
+			'car_type_id' => $this->input->post('car_type'),
+			'color' => $this->input->post('color'),
+			'year' => $this->input->post('year'),
+			'engine' => $this->input->post('engine'), 
+			'fuel_type_id' => $this->input->post('fuel_types'),
+		);
+
+		$update_val = array(
+			'car_id' => $this->input->post('car_id'),
+			'values' => $this->set_update_values($data_vals), 
+		);
+
+		$result = $this->car_model->update_car_data($update_val); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+
+
+	public function get_all_car_data(){   
+
+		$result = $this->car_model->get_all_car_details(); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	} 
+
+
+	public function get_single_car_data(){  
+
+		$data = array('car_id' => $this->input->post('car_id'));
+
+		$result = $this->car_model->get_car_by_id($data); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
 
 
 
@@ -142,5 +234,27 @@ class car_controller extends CI_Controller {
 
 	public function create_account(){
 		$this->load->view('create_account');
+	}
+
+
+	public function set_update_values($dataset){
+		$values = '';
+		$insert_vals =  array();
+
+		$get_columns = array_keys($dataset);
+		$get_values = array_values($dataset);
+
+		for ($i=0; $i <  sizeof($get_columns) ; $i++) { 
+			 
+			if ($i == 0) {
+				$values = "`".$get_columns[$i]."`='".$get_values[$i]."'";
+			}else{
+				$values = $values.",`".$get_columns[$i]."`='".$get_values[$i]."'";
+			}
+		}
+
+
+		return $values;
+
 	}
 }

@@ -10,7 +10,7 @@
 	<div class="container">
 
 		<div class="top-header">
-			<h2>Add Car Details</h2>
+			<h2>Edit Car Details - <span class="car-no"></span></h2>
  
 		</div>
 		 
@@ -18,7 +18,7 @@
 
 			<div class="alert alert-success alert-dismissible d-none">
 			  <button type="button" class="close" data-dismiss="alert">&times;</button>
-			  <strong>Success!</strong> Car details added successfully.
+			  <strong>Success!</strong> Car details updated successfully.
 			</div> 
 
 			<div class="row">
@@ -72,7 +72,7 @@
 						 
 			
 		   
-		  	<button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Car </button> 
+		  	<button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Edit Car </button> 
 
 		  	<a href="<?php echo base_url(); ?>index.php/car_controller/view_cars" class="btn btn-secondary">Cancel</a> 
 			 
@@ -86,7 +86,7 @@
 
 <script>
 	$(document).ready(function () {  
-		
+
 
 		/* Get car types */
 
@@ -140,6 +140,43 @@
     	});
 
 		
+		/* Get Car Data */
+		
+		setTimeout(function(){
+			
+	    	$.ajax({
+				url: '<?php echo base_url(); ?>index.php/car_controller/get_single_car_data',
+        		type: 'POST', 
+        		data: { car_id: getQueryVariable("car_id")},
+			})
+			.done(function(data) {
+				
+	 			var output = JSON.parse(data); 
+	 			console.log(output);
+
+	 			$('.car-no').html(output.data.plate_id);
+
+	 			if (output.status == 200) {
+					$('#plate_id').val(output.data.plate_id);
+					$('#model').val(output.data.model);
+					$('#color').val(output.data.color);
+					$('#engine').val(output.data.engine);
+					$('#year').val(output.data.year);
+					$('#car_type').val(output.data.car_type_id);
+					$('#fuel_types').val(output.data.fuel_type_id);
+	 			}
+
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+
+		},200)
+
+		
 
 		/* Validate Form */
 
@@ -170,6 +207,7 @@
 	        submitHandler: function(form) { 
 	    
 	        	var data = {
+	        		car_id: getQueryVariable("car_id"),
 					plate_id: $('#plate_id').val(),
 					model: $('#model').val(),
 					color: $('#color').val(),
@@ -180,7 +218,7 @@
 	        	}
  
 	        	$.ajax({
-	        		url: '<?php echo base_url(); ?>index.php/car_controller/add_car_data',
+	        		url: '<?php echo base_url(); ?>index.php/car_controller/edit_car_data',
 	        		type: 'POST', 
 	        		data: data,
 	        	})
@@ -191,8 +229,7 @@
  					var output = JSON.parse(data);
 	        		 
 	        		if (output.status == 200) { 
-	        			$('.alert-success').removeClass('d-none'); 
-	        			$('#myform')[0].reset();
+	        			$('.alert-success').removeClass('d-none');  
 	        		}
 
 	        	})
@@ -202,6 +239,17 @@
 			
 			}
 	    });
+
+
+	    function getQueryVariable(variable){
+	       var query = window.location.search.substring(1);
+	       var vars = query.split("&");
+	       for (var i=0;i<vars.length;i++) {
+	               var pair = vars[i].split("=");
+	               if(pair[0] == variable){return pair[1];}
+	       }
+	       return(false);
+		} 
 
    	});
 

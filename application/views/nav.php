@@ -8,16 +8,17 @@
 		    </li>
 		    <li class="nav-item">
 		      	<a class="nav-link" href="#">Reservations</a>
-		    </li>
-	 
+		    </li> 
+		    <li class="nav-item">
+		      	<a class="nav-link" href="#">Driver</a>
+		    </li> 
 		    <li class="nav-item dropdown">
 		     	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 		        Cars
 		      	</a>
 		      	<div class="dropdown-menu">
-		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/view_cars">View Cars</a> 
-		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/view_car_types">Car Types</a> 
-		        	<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/add_car">Add/Remove Cars</a> 
+		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/view_cars">Registered Cars</a> 
+		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/view_car_types">Car Types</a>  
 		      	</div>
 		    </li>
 		     <li class="nav-item">

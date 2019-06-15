@@ -41,9 +41,6 @@
 <script>
 	$(document).ready(function () { 
 
-		
-
-
 
 		$.ajax({
 			url: '<?php echo base_url(); ?>index.php/car_controller/get_single_car_type_data',
@@ -88,9 +85,7 @@
 	        		type: 'POST', 
 	        		data: data,
 	        	})
-	        	.done(function(data) {
-
-	        	 
+	        	.done(function(data) { 
  					
  					var output = JSON.parse(data);
 	        		 
@@ -101,11 +96,10 @@
 	        	})
 	        	.fail(function() {
 	        		console.log("error");
-	        	});
-	        	
- 
+	        	}); 
 			
 			}
+			
 	    });
 
 

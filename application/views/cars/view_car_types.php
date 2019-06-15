@@ -13,9 +13,8 @@
 			<h2>Car Types</h2>
 
 			<a href="<?php echo base_url(); ?>index.php/car_controller/add_car_types" class="btn btn-primary add_button" ><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Car Type</a>
-		</div>
+		</div> 
 		
-
 		<table class="table editable_table">
 		    <thead>
 		      	<tr>
