@@ -158,6 +158,7 @@ class car_controller extends CI_Controller {
 			'year' => $this->input->post('year'),
 			'engine' => $this->input->post('engine'), 
 			'fuel_type_id' => $this->input->post('fuel_types'),
+			'no_of_passegers' => $this->input->post('passengers'), 
 		);
 
 		$result = $this->car_model->insert_car_data($data); 
@@ -181,6 +182,8 @@ class car_controller extends CI_Controller {
 			'year' => $this->input->post('year'),
 			'engine' => $this->input->post('engine'), 
 			'fuel_type_id' => $this->input->post('fuel_types'),
+			'no_of_passegers' => $this->input->post('passengers'), 
+			
 		);
 
 		$update_val = array(

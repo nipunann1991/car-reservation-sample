@@ -174,7 +174,7 @@ class car_model extends CI_Model {
  
 		$values = "'" . implode("','", $data) . "'";
 
-		$insert_query = "INSERT INTO `car`(`plate_id`, `model`, `car_type_id`, `color`, `year`, `engine`, `fuel_type_id`) VALUES (".$values.");";
+		$insert_query = "INSERT INTO `car`(`plate_id`, `model`, `car_type_id`, `color`, `year`, `engine`, `fuel_type_id`, `no_of_passegers`) VALUES (".$values.");";
 
 		$query = $this->db->query($insert_query);
 
@@ -203,9 +203,7 @@ class car_model extends CI_Model {
 
 
 	public function update_car_data($data){
- 
-		//$values = "'" . implode("','", $data) . "'";
-
+    
 		$update_query =  "UPDATE `car` SET ".$data['values']." WHERE car_id='".$data['car_id']."'" ;
 
         $query = $this->db->query($update_query); 
@@ -245,6 +243,9 @@ class car_model extends CI_Model {
 
 			$output = array(
 				'status' => 200,  
+				"draw"  => 1,
+			  	"recordsTotal"  => 57,
+			  	"recordsFiltered"  => 57,
 				'data' => $query->result(), 
 			);
 

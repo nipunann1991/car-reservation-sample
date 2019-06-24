@@ -62,6 +62,8 @@
 				      	</tr>`);
     			}
 
+    			$('table').DataTable();
+
     			if (output.data.length == 0) {
     				$('.editable_table tbody').append(`<tr>
 					        <td></td>

@@ -69,6 +69,15 @@
 				</div>
 				
 			</div>
+
+			<div class="row">
+				<div class="form-group col-md-6">
+				    <label for="passengers">Max no of Passengers</label>
+				    <input type="number" value="1" name="passengers" class="form-control" id="passengers">
+				</div>  
+				
+			</div>
+			 
 						 
 			
 		   
@@ -177,6 +186,7 @@
 					engine: $('#engine').val(),
 					year: $('#year').val(),
 					fuel_types: $('#fuel_types').val(),
+					passengers: $('#passengers').val(),
 	        	}
  
 	        	$.ajax({

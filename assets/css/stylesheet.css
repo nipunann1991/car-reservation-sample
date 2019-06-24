@@ -130,3 +130,35 @@ label.error{
 	/*text-align: center;*/
 	font-size: 14px;
 }
+
+.modal-body ul {
+	padding-left: 15px;
+}
+
+.modal-body ul li{
+	list-style-type: none;
+}
+
+.modal-body ul li label{
+	font-weight: 700;
+	width: 130px;
+}
+
+.input-group>.input-group-append>.input-group-text{
+	background: #fff;
+}
+
+
+.input-group.mb-3 label.error{
+	position: absolute;
+    top: 37px;
+
+}
+
+.dataTables_wrapper .dataTables_filter input { 
+    border: 1px #bebebe solid;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+	padding: 0 5px !important;
+}

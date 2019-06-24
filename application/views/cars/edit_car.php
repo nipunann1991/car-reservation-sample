@@ -69,7 +69,12 @@
 				</div>
 				
 			</div>
-						 
+			<div class="row">
+				<div class="form-group col-md-6">
+				    <label for="passengers">Max no of Passengers</label>
+				    <input type="number" value="1" name="passengers" class="form-control" id="passengers">
+				</div>   
+			</div>		 
 			
 		   
 		  	<button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Edit Car </button> 
@@ -164,6 +169,7 @@
 					$('#year').val(output.data.year);
 					$('#car_type').val(output.data.car_type_id);
 					$('#fuel_types').val(output.data.fuel_type_id);
+					$('#passengers').val(output.data.no_of_passegers); 
 	 			}
 
 			})
@@ -215,6 +221,8 @@
 					engine: $('#engine').val(),
 					year: $('#year').val(),
 					fuel_types: $('#fuel_types').val(),
+					passengers: $('#passengers').val(),
+
 	        	}
  
 	        	$.ajax({

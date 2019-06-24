@@ -3,14 +3,12 @@
 		<a class="navbar-brand" href="<?php echo base_url(); ?>index.php/home_controller/">Car Reservation</a> 
 
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-		      	<a class="nav-link" href="<?php echo base_url(); ?>index.php/home_controller/">Home</a>
-		    </li>
+		 
 		    <li class="nav-item">
 		      	<a class="nav-link" href="#">Reservations</a>
 		    </li> 
 		    <li class="nav-item">
-		      	<a class="nav-link" href="#">Driver</a>
+		      	<a class="nav-link" href="<?php echo base_url(); ?>index.php/driver_controller/view_drivers">Driver</a>
 		    </li> 
 		    <li class="nav-item dropdown">
 		     	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -21,6 +19,9 @@
 		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/view_car_types">Car Types</a>  
 		      	</div>
 		    </li>
+		    <li class="nav-item">
+		      	<a class="nav-link" href="<?php echo base_url(); ?>index.php/pricing_controller/view_pricing">Pricing</a>
+		    </li> 
 		     <li class="nav-item">
 		      	<a class="nav-link" href="#">Users</a>
 		    </li> 
