@@ -19,11 +19,11 @@
 		    <thead>
 		      	<tr>
 			        <th>Id</th> 
-			        <th>Car Type</th>
-			        <th>P/P Hour</th>
+			        <th>Car Type</th> 
 			        <th>P/P Day</th>
+			        <th>P/P Hour</th>
 			        <th>P/P Km</th> 
-			        <th>Date</th> 
+			        <th>Effect From</th> 
 			        <th> </th>
 		      	</tr>
 		    </thead>

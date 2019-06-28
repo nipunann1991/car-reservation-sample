@@ -88,6 +88,37 @@ class pricing_model extends CI_Model {
 		}
 	}
 
+
+
+	public function update_pricing_data($data){
+    
+		$update_query =  "UPDATE `pricing` SET ".$data['values']." WHERE pricing_id='".$data['pricing_id']."'" ;
+
+        $query = $this->db->query($update_query); 
+
+
+		if ($query) {
+
+			$output = array(
+				'status' => 200,  
+				'message' => "Data Updated Successfully", 
+			);
+
+			return $output;
+			 
+
+		}else{
+
+			$output = array(
+				'status' => 404,  
+				'message' => "Data Update Faild", 
+			);
+
+			return $output;  
+		}
+ 
+	}
+
 	
 }
 

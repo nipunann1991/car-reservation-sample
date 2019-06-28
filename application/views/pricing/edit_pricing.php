@@ -190,21 +190,20 @@
 					price_per_day: $('#price_per_day').val(),
 					price_per_hour: $('#price_per_hour').val(),
 					price_per_km: $('#price_per_km').val(), 
+					pricing_id: getQueryVariable("pricing_id")
 	        	}
  
 	        	$.ajax({
-	        		url: '<?php echo base_url(); ?>index.php/pricing_controller/add_pricing_data',
+	        		url: '<?php echo base_url(); ?>index.php/pricing_controller/edit_pricing_data',
 	        		type: 'POST', 
 	        		data: data,
 	        	})
 	        	.done(function(data) {
- 
- 					
+  
  					var output = JSON.parse(data);
 	        		 
 	        		if (output.status == 200) { 
-	        			$('.alert-success').removeClass('d-none'); 
-	        			$('#myform')[0].reset();
+	        			$('.alert-success').removeClass('d-none');  
 	        		}
 
 	        	})

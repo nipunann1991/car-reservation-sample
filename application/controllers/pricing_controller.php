@@ -67,6 +67,52 @@ class pricing_controller extends CI_Controller {
 	 	return $output;
   
 	}
+
+
+		public function edit_pricing_data(){  
+
+		$data_vals = array(
+			'car_type_id' => $this->input->post('car_type'),
+			'price_per_day' => $this->input->post('price_per_day'),
+			'price_per_hour' => $this->input->post('price_per_hour'),
+			'price_per_km' => $this->input->post('price_per_km'),  
+		);
+
+		$update_val = array(
+			'pricing_id' => $this->input->post('pricing_id'),
+			'values' => $this->set_update_values($data_vals), 
+		);
+
+		$result = $this->pricing_model->update_pricing_data($update_val); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+
+	public function set_update_values($dataset){
+		$values = '';
+		$insert_vals =  array();
+
+		$get_columns = array_keys($dataset);
+		$get_values = array_values($dataset);
+
+		for ($i=0; $i <  sizeof($get_columns) ; $i++) { 
+			 
+			if ($i == 0) {
+				$values = "`".$get_columns[$i]."`='".$get_values[$i]."'";
+			}else{
+				$values = $values.",`".$get_columns[$i]."`='".$get_values[$i]."'";
+			}
+		}
+
+
+		return $values;
+
+	}
   
 
 	 
