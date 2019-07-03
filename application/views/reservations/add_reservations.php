@@ -37,12 +37,12 @@
 			<div class="row">
 				<div class="form-group col-md-4"> 
 					<label for="res_date">Reservation Start Date</label>
-			   		<input type="date" name="date" class="form-control" id="res_date" /> 
+			   		<input type="date" name="res_start_date" class="form-control" id="res_start_date" /> 
 				</div>   
 				<div class="form-group col-md-4">
 				   
 					<label for="res_date">Reservation End Date</label>
-			   		<input type="date" name="date" class="form-control" id="res_date" />
+			   		<input type="date" name="res_end_date" class="form-control" id="res_end_date" />
 				  
 				</div>  
 			</div> 
@@ -72,8 +72,8 @@
  
 
 				<div class="form-group col-md-6">
-				    <label for="picing_type">Pricing Type</label>
-				    <select class="form-control" name="picing_type" id="picing_type"> 
+				    <label for="pricing_type">Pricing Type</label>
+				    <select class="form-control" name="pricing_type" id="pricing_type"> 
 				    	<option value="default">Please select pricing type</option>
 						<option value="1">Price per day</option>
 						<option value="2">Price per hour</option>
@@ -93,11 +93,7 @@
 				
 			</div>
 
-			 
-			 
-			 
-						 
-			
+			  
 		   
 		  	<button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Reservation </button> 
 
@@ -117,6 +113,8 @@
 		var pricing_type = {}
 		var total = 0;
 		var pricing_value = 0;
+		var pricing_id = 0;
+
 		/* Get car types */
 
 	    $.ajax({
@@ -247,8 +245,12 @@
 	    			pricing_type = {
 						price_per_day: output.data.price_per_day,
 						price_per_hour: output.data.price_per_hour,
-						price_per_km: output.data.price_per_km,
+						price_per_km: output.data.price_per_km  
 					}  
+
+					pricing_id = output.data.pricing_id;
+
+					console.log(pricing_type, pricing_id)
 	    		}
  
 
@@ -261,11 +263,11 @@
 		});
 		
 
-		$('#picing_type').on('change', function() { 
+		$('#pricing_type').on('change', function() { 
 			 
 			 if(this.value == '1') {
 				$('#res_qty_label').html('No of Days');  
-				pricing_value = pricing_type.price_per_day;  
+				pricing_value = pricing_type.price_per_day;   
 
 			 }else if(this.value == '2'){
 				$('#res_qty_label').html('No of Hours');
@@ -278,6 +280,7 @@
 
 			total = pricing_value * parseInt($('#res_qty').val());
 			$('#price').html(total); 
+			console.log(pricing_value) 
 
 		});
 
@@ -288,6 +291,11 @@
 			total = pricing_value * parseInt($('#res_qty').val());
 			$('#price').html(total);
 
+		});
+
+
+		$('#res_start_date').on('change', function() {  
+			 $('#res_end_date').val($('#res_start_date').val()) 
 		});
 
 	
@@ -335,6 +343,14 @@
 	                valueNotEquals: "default" 
 	            }, 
 
+	            res_start_date:{
+	            	required: true,
+	            }, 
+
+	            res_end_date:{
+	            	required: true,
+	            },
+
 	            car_type: {
 	               valueNotEquals: "default" 
 	            },
@@ -349,47 +365,49 @@
 	                required: true, 
 	            },
 
-	            picing_type: {
+	            pricing_type: {
 	            	valueNotEquals: "default",
 	                required: true, 
 	            },
 	        }, 
 
 	        submitHandler: function(form) { 
-	    
-	    //     	var data = {
-					// plate_id: $('#plate_id').val(),
-					// model: $('#model').val(),
-					// color: $('#color').val(),
-					// car_type: $('#car_type').val(),
-					// engine: $('#engine').val(),
-					// year: $('#year').val(),
-					// fuel_types: $('#fuel_types').val(),
-					// passengers: $('#passengers').val(),
-	    //     	}
  
-	     //    	$.ajax({
-	     //    		url: '<?php echo base_url(); ?>index.php/car_controller/add_car_data',
-	     //    		type: 'POST', 
-	     //    		data: data,
-	     //    	})
-	     //    	.done(function(data) {
+	        	var data = { 
+					res_date: $('#res_start_date').val(),
+					res_end_date: $('#res_end_date').val(),
+					customer_id: $('#customer_name').val(),
+					car_id: $('#plate_no').val(),
+					driver_id: $('#driver_name').val(),
+					pricing_id: pricing_id,
+					pricing_type: $('#pricing_type').val(),
+					pricing_qty: $('#res_qty').val(),
+					status: 1,
+	        	}
+ 
+	        	$.ajax({
+	        		url: '<?php echo base_url(); ?>index.php/reservations_controller/add_reservations_data',
+	        		type: 'POST', 
+	        		data: data,
+	        	})
+	        	.done(function(data) {
 
-	     //    		$('#add_car_type').val('');
+	        		$('#add_car_type').val('');
  					
- 					// var output = JSON.parse(data);
+ 					var output = JSON.parse(data);
 	        		 
-	     //    		if (output.status == 200) { 
-	     //    			$('.alert-success').removeClass('d-none'); 
-	     //    			$('#myform')[0].reset();
-	     //    		}
+	        		if (output.status == 200) { 
+	        			$('.alert-success').removeClass('d-none'); 
+	        			$('#myform')[0].reset();
+	        		}
 
-	     //    	})
-	     //    	.fail(function() {
-	     //    		console.log("error");
-	     //    	}); 
+	        	})
+	        	.fail(function() {
+	        		console.log("error");
+	        	}); 
 			
 			}
+
 	    });
 
    	});

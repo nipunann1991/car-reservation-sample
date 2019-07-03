@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class reservations_model extends CI_Model {
 	
 
-	public function insert_pricing_data($data){
+	public function insert_reservations_data($data){
  
 		$values = "'" . implode("','", $data) . "'";
 
-		$insert_query = "INSERT INTO `pricing`(`car_type_id`, `price_per_hour`, `price_per_day`, `price_per_km`, `update_date`) VALUES (".$values.");";
+		$insert_query = "INSERT INTO  `reservations`(`res_date`, `res_end_date`, `customer_id`, `car_id`, `driver_id`, `pricing_id`, `pricing_type`, `pricing_qty`, `status`) VALUES (".$values.");";
 
 		$query = $this->db->query($insert_query);
 
@@ -35,9 +35,9 @@ class reservations_model extends CI_Model {
 	}
 	 
 
-	public function get_all_active_customer_details(){
+	public function get_all_reservations_details(){
 
-	 	$select_query = "SELECT * FROM `customers` WHERE status = 1 "; 
+	 	$select_query = "SELECT r.*, r.status AS rstatus, c.*, c1.*, d.driver_id, d.first_name, d.last_name, d.contact_no, p.* FROM `reservations` AS r, `customers` AS c, `car` AS c1, `driver` AS d, `pricing` AS p WHERE c.customer_id=r.customer_id AND r.car_id=c1.car_id AND r.driver_id=d.driver_id AND r.pricing_id=p.pricing_id"; 
 
 		$query = $this->db->query($select_query);
  
@@ -50,6 +50,33 @@ class reservations_model extends CI_Model {
 
 			return $output; 
 
+		}else{
+
+			$output = array(
+				'status' => 404,  
+				'data' => "Invalid sql query", 
+			);
+
+			return $output;  
+		}
+	}
+
+
+	public function get_all_reservations_details_by_id($data){
+
+	 	$select_query = "SELECT r.*, r.status AS rstatus, c.contact_no AS customer_contact, c.*, c1.*, d.driver_id, d.first_name, d.last_name, d.contact_no, p.* FROM `reservations` AS r, `customers` AS c, `car` AS c1, `driver` AS d, `pricing` AS p WHERE c.customer_id=r.customer_id AND r.car_id=c1.car_id AND r.driver_id=d.driver_id AND r.pricing_id=p.pricing_id AND  r.`res_id`='".$data['res_id']."'"; 
+
+		$query = $this->db->query($select_query);
+		$results = $query->result();
+ 
+		if (sizeof($results) == 1) {
+
+			$output = array(
+				'status' => 200,   
+				'data' => $results[0]
+			);
+
+			return $output;
 		}else{
 
 			$output = array(

@@ -27,73 +27,78 @@ class reservations_controller extends CI_Controller {
 	// 	$this->load->view('pricing/edit_pricing');
 	// }
 
-	// public function add_pricing_data(){  
+	public function add_reservations_data(){  
 
-	// 	$data = array( 
-	// 		'car_type_id' => $this->input->post('car_type'),
-	// 		'price_per_day' => $this->input->post('price_per_day'),
-	// 		'price_per_hour' => $this->input->post('price_per_hour'),
-	// 		'price_per_km' => $this->input->post('price_per_km'),  
-	// 		'update_date' => date("Y-m-d"),  
-	// 	);
+		$data = array( 
+			'res_date' => $this->input->post('res_date'),
+			'res_end_date' => $this->input->post('res_end_date'),
+			'customer_id' => $this->input->post('customer_id'),
+			'car_id' => $this->input->post('car_id'),  
+			'driver_id' => $this->input->post('driver_id'),  
+			'pricing_id' => $this->input->post('pricing_id'),  
+			'pricing_type' => $this->input->post('pricing_type'),  
+			'pricing_qty' => $this->input->post('pricing_qty'),  
+			'status' => $this->input->post('status'),  
+			 
+		);
 
-	// 	$result = $this->pricing_model->insert_pricing_data($data); 
+		$result = $this->reservations_model->insert_reservations_data($data); 
 
-	// 	$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
-	// 	$output =  $this->output->set_output($set_json_output);
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
 
-	//  	return $output;
+	 	return $output;
   
-	// }
+	}
 
-	// public function get_all_pricing_data(){   
+	public function get_all_reservations_data(){   
 
-	// 	$result = $this->pricing_model->get_all_pricing_details(); 
+		$result = $this->reservations_model->get_all_reservations_details(); 
 
-	// 	$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
-	// 	$output =  $this->output->set_output($set_json_output);
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
 
-	//  	return $output;
+	 	return $output;
   
-	// } 
+	} 
 
 
-	// public function get_single_pricing_data(){  
+	public function get_single_reservation_data(){  
 
-	// 	$data = array('pricing_id' => $this->input->post('pricing_id'));
+		$data = array('res_id' => $this->input->post('res_id'));
 
-	// 	$result = $this->pricing_model->get_pricing_by_id($data); 
+		$result = $this->reservations_model->get_all_reservations_details_by_id($data); 
 
-	// 	$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
-	// 	$output =  $this->output->set_output($set_json_output);
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
 
-	//  	return $output;
+	 	return $output;
   
-	// }
+	}
 
 
-	// 	public function edit_pricing_data(){  
+	public function edit_pricing_data(){  
 
-	// 	$data_vals = array(
-	// 		'car_type_id' => $this->input->post('car_type'),
-	// 		'price_per_day' => $this->input->post('price_per_day'),
-	// 		'price_per_hour' => $this->input->post('price_per_hour'),
-	// 		'price_per_km' => $this->input->post('price_per_km'),  
-	// 	);
+		$data_vals = array(
+			'car_type_id' => $this->input->post('car_type'),
+			'price_per_day' => $this->input->post('price_per_day'),
+			'price_per_hour' => $this->input->post('price_per_hour'),
+			'price_per_km' => $this->input->post('price_per_km'),  
+		);
 
-	// 	$update_val = array(
-	// 		'pricing_id' => $this->input->post('pricing_id'),
-	// 		'values' => $this->set_update_values($data_vals), 
-	// 	);
+		$update_val = array(
+			'pricing_id' => $this->input->post('pricing_id'),
+			'values' => $this->set_update_values($data_vals), 
+		);
 
-	// 	$result = $this->pricing_model->update_pricing_data($update_val); 
+		$result = $this->pricing_model->update_pricing_data($update_val); 
 
-	// 	$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
-	// 	$output =  $this->output->set_output($set_json_output);
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
 
-	//  	return $output;
+	 	return $output;
   
-	// }
+	}
 
 
 	// public function set_update_values($dataset){
