@@ -69,7 +69,21 @@ class pricing_controller extends CI_Controller {
 	}
 
 
-		public function edit_pricing_data(){  
+	public function get_latest_pricing_by_car_type_data(){  
+
+		$data = array('car_type_id' => $this->input->post('car_type_id'));
+
+		$result = $this->pricing_model->get_latest_pricing_by_car_type($data); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+
+	public function edit_pricing_data(){  
 
 		$data_vals = array(
 			'car_type_id' => $this->input->post('car_type'),

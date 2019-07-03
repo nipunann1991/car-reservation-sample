@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 24, 2019 at 12:23 AM
+-- Generation Time: Jul 03, 2019 at 12:47 PM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `car` (
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`car_id`),
   UNIQUE KEY `plate_id` (`plate_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `car`
@@ -53,7 +53,8 @@ INSERT INTO `car` (`car_id`, `plate_id`, `model`, `car_type_id`, `color`, `year`
 (2, 'CBA8856', 'Suzuki - WagonR', 20, 'Red', 2018, 660, 5, 4, 1),
 (3, 'CBA8851', 'Suzuki - WagonR', 20, 'White', 2017, 660, 5, 1, 0),
 (4, 'KX4033', 'TATA - Nano', 21, 'Purple', 2013, 800, 5, 1, 1),
-(6, 'CBE8908', 'Honda Fit', 17, 'White', 2018, 1300, 4, 1, 1);
+(6, 'CBE8908', 'Honda Fit', 17, 'White', 2018, 1300, 4, 1, 1),
+(7, '', '', 0, '', 0, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `car_type` (
   `car_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `car_type` varchar(50) NOT NULL,
   PRIMARY KEY (`car_type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `car_type`
@@ -75,8 +76,36 @@ CREATE TABLE IF NOT EXISTS `car_type` (
 INSERT INTO `car_type` (`car_type_id`, `car_type`) VALUES
 (23, 'Mini Van'),
 (21, 'Nano Cab'),
-(20, 'Mini Cab'),
+(20, 'Mini Car'),
 (17, 'SUV Car');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+DROP TABLE IF EXISTS `customers`;
+CREATE TABLE IF NOT EXISTS `customers` (
+  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `f_name` varchar(50) NOT NULL,
+  `l_name` varchar(50) NOT NULL,
+  `email_addr` varchar(50) NOT NULL,
+  `address` varchar(150) NOT NULL,
+  `nic` varchar(20) NOT NULL,
+  `contact_no` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`customer_id`, `f_name`, `l_name`, `email_addr`, `address`, `nic`, `contact_no`, `password`, `status`) VALUES
+(1, 'Nipuna', 'Nanayakkara', 'nipunann0710@gmail.com', '275 A Colombo Road\nGampaha', '910752839v', '0716378515', '', 1),
+(3, 'Imali', 'Gunawardena', 'imali@gmail.com', '233, Welikanna, Waga.			    	\n				    ', '95221540v', '0719957212', '', 1);
 
 -- --------------------------------------------------------
 
@@ -104,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `driver` (
 --
 
 INSERT INTO `driver` (`driver_id`, `first_name`, `last_name`, `licence_no`, `nic`, `address`, `email`, `contact_no`, `status`, `car_id`) VALUES
-(1, 'Amal', 'Gamage', '32789324423D', '900752839v', '112, Kaduwela Road,\nMalabe', 'amal@gmail.com', '0716378515', 1, -1),
+(1, 'Amal', 'Gamage', '32789324423D', '900752839v', '112, Kaduwela Road,\nMalabe', 'amal@gmail.com', '0716378515', 0, -1),
 (2, 'Saman', 'Perera', '3534512223', '758900896v', '23, Galle Road,\nKaluthara.', 'saman@gmail.com', '0745862272', 1, -1);
 
 -- --------------------------------------------------------
@@ -140,20 +169,43 @@ DROP TABLE IF EXISTS `pricing`;
 CREATE TABLE IF NOT EXISTS `pricing` (
   `pricing_id` int(11) NOT NULL AUTO_INCREMENT,
   `car_type_id` int(11) NOT NULL,
-  `price_per_hour` int(11) NOT NULL,
   `price_per_day` int(11) NOT NULL,
+  `price_per_hour` int(11) NOT NULL,
   `price_per_km` int(11) NOT NULL,
   `update_date` date DEFAULT NULL,
   PRIMARY KEY (`pricing_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pricing`
 --
 
-INSERT INTO `pricing` (`pricing_id`, `car_type_id`, `price_per_hour`, `price_per_day`, `price_per_km`, `update_date`) VALUES
+INSERT INTO `pricing` (`pricing_id`, `car_type_id`, `price_per_day`, `price_per_hour`, `price_per_km`, `update_date`) VALUES
 (2, 21, 5600, 800, 50, '2019-06-23'),
-(3, 20, 12000, 1250, 80, '2019-06-23');
+(3, 20, 12000, 1250, 80, '2019-06-23'),
+(4, 17, 15000, 1800, 150, '2019-06-28'),
+(8, 0, 0, 0, 0, '2019-06-29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservations`
+--
+
+DROP TABLE IF EXISTS `reservations`;
+CREATE TABLE IF NOT EXISTS `reservations` (
+  `res_id` int(11) NOT NULL AUTO_INCREMENT,
+  `res_date` date NOT NULL,
+  `res_end_date` date NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `car_id` int(11) NOT NULL,
+  `driver_id` int(11) NOT NULL,
+  `pricing_id` int(11) NOT NULL,
+  `pricing_type` int(11) NOT NULL,
+  `pricing_qty` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`res_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 

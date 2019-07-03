@@ -30,6 +30,33 @@ class driver_model extends CI_Model {
 	}
 
 
+
+	public function get_all_active_driver_details(){
+
+	 	$select_query = "SELECT * FROM `driver` WHERE status = 1"; 
+		$query = $this->db->query($select_query);
+ 
+		if ($query) {
+
+			$output = array(
+				'status' => 200,  
+				'data' => $query->result(), 
+			);
+
+			return $output; 
+
+		}else{
+
+			$output = array(
+				'status' => 404,  
+				'data' => "Invalid sql query", 
+			);
+
+			return $output;  
+		}
+	}
+
+
 	public function get_driver_by_id($data){ 
 		 
 

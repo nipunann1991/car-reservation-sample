@@ -41,6 +41,18 @@ class driver_controller extends CI_Controller {
   
 	}  
 
+
+	public function get_all_active_driver_data(){   
+
+		$result = $this->driver_model->get_all_active_driver_details(); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}  
+
 	public function get_single_driver_data(){  
 
 		$data = array('driver_id' => $this->input->post('driver_id'));

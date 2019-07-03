@@ -106,6 +106,20 @@ class car_controller extends CI_Controller {
 	}
 
 
+	public function get_all_car_type_by_car_id_data(){   
+		
+		$data = array('car_type_id' => $this->input->post('car_type_id'));
+
+		$result = $this->car_model->get_all_car_type_by_car_id($data); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+
 	public function get_single_car_type_data(){  
 
 		$data = array('car_type_id' => $this->input->post('car_type_id'));
@@ -254,9 +268,8 @@ class car_controller extends CI_Controller {
 			}else{
 				$values = $values.",`".$get_columns[$i]."`='".$get_values[$i]."'";
 			}
-		}
-
-
+		} 
+		
 		return $values;
 
 	}

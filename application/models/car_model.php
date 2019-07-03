@@ -142,6 +142,34 @@ class car_model extends CI_Model {
 			return $output;
 		}
 	} 
+
+	public function get_all_car_type_by_car_id($data){ 
+		 
+
+	 	$select_query = "SELECT * FROM `car` WHERE `car_type_id`='".$data['car_type_id']."'"; 
+ 
+
+		$query = $this->db->query($select_query);
+
+		$results = $query->result();
+
+		if ($query) {
+
+			$output = array(
+				'status' => 200,   
+				'data' => $results
+			);
+
+			return $output;
+		}else{
+
+			$output = array(
+				'status' => 404,  
+				'message' => 'Invalid Data'
+			);
+			return $output;
+		}
+	} 
 	
 
 	public function get_all_fuel_types(){

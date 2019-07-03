@@ -5,12 +5,12 @@
 		<ul class="navbar-nav ml-auto">
 		 
 		    <li class="nav-item">
-		      	<a class="nav-link" href="#">Reservations</a>
+		      	<a class="nav-link" href="<?php echo base_url(); ?>index.php/reservations_controller/view_reservations">Reservations</a>
 		    </li>  
 		    <li class="nav-item dropdown">
 		     	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Users</a>
 		      	<div class="dropdown-menu">
-		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/car_controller/view_cars">Customers</a> 
+		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/customer_controller/view_customers">Customers</a> 
 		      		<a class="dropdown-item" href="<?php echo base_url(); ?>index.php/driver_controller/view_drivers">Drivers</a>  
 		      	</div>
 		    </li>
