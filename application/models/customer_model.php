@@ -37,7 +37,7 @@ class customer_model extends CI_Model {
 
 	public function get_all_customer_details(){
 
-	 	$select_query = "SELECT * FROM `customers` "; 
+	 	$select_query = "SELECT * FROM `customers` ORDER BY customer_id DESC"; 
 
 		$query = $this->db->query($select_query);
  
@@ -60,6 +60,34 @@ class customer_model extends CI_Model {
 			return $output;  
 		}
 	}
+
+
+	public function get_latest_customer_details(){
+
+	 	$select_query = "SELECT * FROM `customers` ORDER BY customer_id DESC"; 
+
+		$query = $this->db->query($select_query);
+ 
+		if ($query) {
+
+			$output = array(
+				'status' => 200,  
+				'data' => $query->result(), 
+			);
+
+			return $output; 
+
+		}else{
+
+			$output = array(
+				'status' => 404,  
+				'data' => "Invalid sql query", 
+			);
+
+			return $output;  
+		}
+	}
+
 
 
 	public function get_all_active_customer_details(){

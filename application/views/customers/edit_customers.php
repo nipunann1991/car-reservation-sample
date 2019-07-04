@@ -10,14 +10,14 @@
 	<div class="container">
 
 		<div class="top-header">
-			<h2>Add New Customer</h2> 
+			<h2>Edit Customer</h2> 
 		</div>
 		 
 		<form  id="myform" class="col-md-7 box_form" novalidate="novalidate"> 
 
 			<div class="alert alert-success alert-dismissible d-none">
 			  <button type="button" class="close" data-dismiss="alert">&times;</button>
-			  <strong>Success!</strong> Customer details added successfully.
+			  <strong>Success!</strong> Customer details updated successfully.
 			</div> 
 
 		 

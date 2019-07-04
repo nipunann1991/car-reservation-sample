@@ -57,6 +57,18 @@ class customer_controller extends CI_Controller {
 	} 
 
 
+	public function get_latest_customer_data(){   
+
+		$result = $this->customer_model->get_latest_customer_details(); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	} 
+
+
 	public function get_all_active_customer_data(){   
 
 		$result = $this->customer_model->get_all_active_customer_details(); 

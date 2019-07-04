@@ -58,9 +58,9 @@
     				$('.editable_table tbody').append(`
 	    				<tr>
 					        <td>`+output.data[i].pricing_id+`</td>
-					        <td>`+output.data[i].car_type+`</td>
-					        <td>`+output.data[i].price_per_hour+`</td>
+					        <td>`+output.data[i].car_type+`</td> 
 					        <td>`+output.data[i].price_per_day+`</td>
+					        <td>`+output.data[i].price_per_hour+`</td>
 					        <td>`+output.data[i].price_per_km+`</td>
 					        <td>`+output.data[i].update_date+`</td> 
 					        <td>  

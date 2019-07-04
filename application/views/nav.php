@@ -27,7 +27,9 @@
 		    <li class="nav-item">
 		      	<a class="nav-link" href="<?php echo base_url(); ?>index.php/pricing_controller/view_pricing">Pricing</a>
 		    </li> 
-		  
+		  	<li class="nav-item">
+		      	<a class="nav-link" href="<?php echo base_url(); ?>index.php/pricing_controller/view_pricing">Reports</a>
+		    </li> 
 		    <li class="nav-item user_name">
 		    	<a class="nav-link" href="javascript:void(0);">Hello, <?php echo $this->session->userdata('username'); ?>
 		    	</a> 

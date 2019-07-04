@@ -52,8 +52,12 @@
           	<li><label for="customer_contact">Contact No</label> <span id="customer_contact"></span> </li>
           	<hr />
           	<li><label for="plate_id">Car Plate</label> <span id="plate_id"></span></li>
+          	<li><label for="car_model">Car Model</label> <span id="car_model"></span></li>
           	<li><label for="car_type">Car Type</label> <span id="car_type"></span></li>
           	<li><label for="driver">Driver</label> <span id="first_name"></span> <span id="last_name"></span></li>
+          	<li><label for="selected_type">Selected Type</label> <span id="selected_type"></span></li> 
+          	<li><label for="price">Price</label> <span id="price"></span></li> 
+          	<li><label for="status">Status</label> <span id="status"></span></li> 
           </ul>
         </div> 
         <div class="modal-footer">
@@ -122,7 +126,7 @@
 					        <td>  
 					        	<a href="#" data-toggle="modal" onclick="view_reservation(`+output.data[i].res_id+`)" class="edit_item"><i class="fa fa-eye" aria-hidden="true"></i> View
 					        	</a>
-					        	<a href="<?php echo base_url(); ?>index.php/pricing_controller/edit_pricing/?pricing_id=`+output.data[i].res_id+`" class="edit_item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+					        	<a href="<?php echo base_url(); ?>index.php/reservations_controller/edit_reservations/?res_id=`+output.data[i].res_id+`" class="edit_item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
 					        	</a> 
 					        	<a href="javascript:void(0)" data-id="`+output.data[i].res_id+`" class="delete_item"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete
 					        	</a> 
@@ -152,7 +156,10 @@
     		data: { res_id: id},
 		})
 		.done(function(data) {
-			
+			var total = 0;
+			var pricing_value = 0;
+			var pricing_id = 0;
+
  			var output = JSON.parse(data); 
  			console.log(output.data);
 
@@ -166,8 +173,40 @@
 				$('#f_name').html(output.data.f_name);
 				$('#customer_contact').html(output.data.customer_contact);
 				$('#plate_id').html(output.data.plate_id);
+				$('#car_type').html(output.data.car_type); 
 				$('#first_name').html(output.data.first_name);  
 				$('#last_name').html(output.data.last_name);  
+				$('#car_model').html(output.data.model);  
+
+				if(output.data.pricing_type == '1') {
+					$('#selected_type').html('No of Days');  
+					pricing_value = output.data.price_per_day;   
+
+				}else if(output.data.pricing_type == '2'){
+					$('#selected_type').html('No of Hours');
+					pricing_value = output.data.price_per_hour;
+					
+				}else{
+					$('#selected_type').html('No of Kms'); 
+					pricing_value = output.data.price_per_km; 
+				}
+
+				total = parseInt(pricing_value) * parseInt(output.data.pricing_qty);
+				$('#price').html( parseInt(pricing_value) +" x "+ parseInt(output.data.pricing_qty)+ " = <b>Rs. "+total+"</b>"); 
+				console.log(pricing_value) 
+
+
+				if (output.data.rstatus == 1) {
+					label = '<span class="badge badge-success">Active</span>'
+				}else if (output.data.rstatus == 2) {
+					label = '<span class="badge badge-primary">Completed</span>'
+				}else if (output.data.rstatus == -1) {
+					label = '<span class="badge badge-warning">Pending</span>'
+				}else{
+					label = '<span class="badge badge-danger">Canceled</span>' 
+				}
+
+				$('#status').html(label);
 
 
  			}

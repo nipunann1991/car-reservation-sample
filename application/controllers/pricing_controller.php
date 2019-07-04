@@ -55,6 +55,18 @@ class pricing_controller extends CI_Controller {
 	} 
 
 
+	public function get_all_pricing_data_dashboard(){   
+
+		$result = $this->pricing_model->get_all_pricing_details_dashboard(); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	} 
+
+
 	public function get_single_pricing_data(){  
 
 		$data = array('pricing_id' => $this->input->post('pricing_id'));

@@ -98,6 +98,30 @@ label{
     border: 1px #e1e1e1 solid;
 }
 
+.box{
+	border: 1px #e1e1e1 solid;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+.box p{
+	font-size: 19px;
+	font-weight: 700;
+	margin-bottom: 0;
+}
+
+.box span.value{
+	font-size: 25px;
+}
+
+.stats_row{
+	margin-bottom: 30px;
+}
+
+.stats_row h4{
+	margin-bottom: 15px;	
+}
+
 .navbar-dark .navbar-nav .nav-link{
 	color: #ffffff; 
 }
@@ -181,4 +205,8 @@ label{
 
 form h5{
 	margin-bottom: 15px;	
+}
+
+.table td, .table th {
+    padding: 5px;
 }
