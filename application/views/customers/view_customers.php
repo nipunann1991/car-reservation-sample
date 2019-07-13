@@ -40,7 +40,7 @@
     <div class="modal-dialog">
       <div class="modal-content"> 
         <div class="modal-header">
-          <h4 class="modal-title">Driver Details</h4>
+          <h4 class="modal-title">Customer Details</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div> 
         <div class="modal-body">
@@ -110,7 +110,17 @@
 
     			}  
 
-    			$('table').DataTable();
+    			$('table').DataTable({
+
+			        dom: 'Bflrtip',
+			        buttons: [
+			            {
+				            extend: 'copy',
+				            text: '<h5>Export Report to :</h5>'
+				        }, 
+				        'csv', 'excel', 'pdf', 'print'
+					]
+			    });
     			
     		}
 

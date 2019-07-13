@@ -12,8 +12,17 @@ class home_controller extends CI_Controller {
         $this->load->model('home_model'); 
 
         if (!isset($this->session->userdata['logged_in'])) {
-        	header('Location: '.base_url().'index.php');
+        	header('Location: '.base_url().'index.php'); 
+        }else{
+        	 if ($this->session->userdata['role'] == 1){ 
+        	 	
+			}else{
+				header('Location: '.base_url().'index.php/user_controller');
+			}
         }
+
+       
+ 
 	}
 
 	public function index(){
@@ -30,6 +39,8 @@ class home_controller extends CI_Controller {
 			'total_cars' => $this->home_model->get_total_cars(), 
 			'total_users' => $this->home_model->get_total_users(), 
 			'total_drivers' => $this->home_model->get_total_drivers(), 
+			'get_monthly_income' => $this->home_model->get_monthly_income(), 
+			'pending_income' => $this->home_model->get_pending_income(), 
 		);
 
 		$set_json_output = json_encode($arrayName,JSON_PRETTY_PRINT); 

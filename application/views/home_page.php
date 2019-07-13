@@ -39,6 +39,23 @@
 				</div> 
 			</div>
 		</div>
+
+		<div class="row stats_row">
+			 
+			<div class="col-md-3">
+				<div class="box btn-pink">
+					<p>This Months Revenue</p>
+					<span class="value" id="monthly_income">Rs. 0</span>
+				</div> 
+			</div>
+			<div class="col-md-3">
+				<div class="box btn-purple">
+					<p>Pending Income </p>
+					<span class="value" id="pending_income">Rs. 0</span>
+				</div> 
+			</div>
+			 
+		</div>
 		
 		<div class="row stats_row">
 			<div class="col-md-6">
@@ -103,6 +120,8 @@
  			$('#total_cars').html(output.total_cars)
  			$('#total_users').html(output.total_users)
  			$('#total_drivers').html(output.total_drivers)
+ 			$('#monthly_income').html('Rs. '+output.get_monthly_income)
+ 			$('#pending_income').html('Rs. '+output.pending_income)
 
 		})
 		.fail(function() {

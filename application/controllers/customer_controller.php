@@ -12,6 +12,8 @@ class customer_controller extends CI_Controller {
         }
 	}
 
+ 
+
 	public function view_customers(){
 		$this->load->view('customers/view_customers');
 	}

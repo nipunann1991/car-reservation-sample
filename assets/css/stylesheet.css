@@ -210,3 +210,35 @@ form h5{
 .table td, .table th {
     padding: 5px;
 }
+
+.tab-content>.active{
+	padding: 15px;
+}
+
+.dt-buttons{
+	background: #f3f3f3;
+    padding: 15px;
+    border: 1px #ccc solid;
+    margin-bottom: 15px;
+}
+
+button.buttons-copy{
+	background: transparent;
+    border: 0;
+    cursor: default;
+    margin-right: 10px;
+}
+
+button.buttons-copy h5{
+	margin-bottom: 0;
+}
+
+.btn-pink{
+	background: #d51eb6;
+	color: #fff;
+}
+
+.btn-purple{
+	background: #861ed5;
+	color: #fff;
+}

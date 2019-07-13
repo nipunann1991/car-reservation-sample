@@ -10,28 +10,12 @@
 	<div class="container">
 
 		<div class="top-header">
-			<h2>View Reservations</h2> 
+			<h2>Reports & Statistics</h2> 
 
-			<a href="<?php echo base_url(); ?>index.php/reservations_controller/add_reservations" class="btn btn-primary add_button" ><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Reservations</a>
+			 
 		</div> 
 
-		<table class="table editable_table">
-		    <thead>
-		      	<tr>
-			        <th>Id</th> 
-			        <th>Date</th> 
-			        <th>Customer Name</th>
-			        <th>Car</th>
-			        <th>Driver</th> 
-			        <th>Trip Cost</th> 
-			        <th>Status</th> 
-			        <th> </th>
-		      	</tr>
-		    </thead>
-		    <tbody> 
-
-		    </tbody>
-		</table>
+		 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto voluptatibus cum blanditiis deserunt ut fuga cumque, magnam repellat, quasi minima dignissimos neque, at recusandae voluptate accusantium voluptas voluptates ducimus atque.</p>
 
 	</div>
 </div>
@@ -143,19 +127,7 @@
 
     			}  
 
-    			$('table').DataTable({
-
-			        dom: 'Bflrtip',
-			        buttons: [
-			            {
-				            extend: 'copy',
-				            text: '<h5>Export Report to :</h5>'
-				        }, 
-				        'csv', 'excel', 'pdf', 'print'
-					]
-			    });
-
-
+    			$('table').DataTable();
     			
     		}
 
@@ -163,7 +135,8 @@
     	.fail(function() {
     		console.log("error");
     	});
-    }) 
+    })
+
 
     function view_reservation(id){
 		 

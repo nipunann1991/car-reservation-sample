@@ -6,7 +6,7 @@ class driver_model extends CI_Model {
 
 	public function get_all_driver_details(){
 
-	 	$select_query = "SELECT * FROM `driver`"; 
+	 	$select_query = "SELECT * FROM `driver` WHERE driver_id <> 0"; 
 		$query = $this->db->query($select_query);
  
 		if ($query) {

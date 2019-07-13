@@ -73,7 +73,17 @@
 
     			}  
 
-    			$('table').DataTable();
+    			$('table').DataTable({
+
+			        dom: 'Bflrtip',
+			        buttons: [
+			            {
+				            extend: 'copy',
+				            text: '<h5>Export Report to :</h5>'
+				        }, 
+				        'csv', 'excel', 'pdf', 'print'
+					]
+			    });
     			
     		}
 

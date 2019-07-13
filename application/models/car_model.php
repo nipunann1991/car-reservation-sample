@@ -263,7 +263,7 @@ class car_model extends CI_Model {
 
 	public function get_all_car_details(){
 
-	 	$select_query = "SELECT c.*, ct.car_type, ft.fuel_name  FROM `car` AS c, `car_type` AS ct, `fuel_types` AS ft WHERE c.car_type_id = ct.car_type_id AND c.fuel_type_id = ft.fuel_type_id ORDER BY car_id DESC"; 
+	 	$select_query = "SELECT c.*, ct.car_type, ft.fuel_name  FROM `car` AS c, `car_type` AS ct, `fuel_types` AS ft WHERE c.car_type_id = ct.car_type_id AND c.fuel_type_id = ft.fuel_type_id AND c.car_id <> 0 ORDER BY car_id DESC"; 
 
 		$query = $this->db->query($select_query);
  

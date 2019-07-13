@@ -64,7 +64,7 @@ class customer_model extends CI_Model {
 
 	public function get_latest_customer_details(){
 
-	 	$select_query = "SELECT * FROM `customers` ORDER BY customer_id DESC"; 
+	 	$select_query = "SELECT * FROM `customers` ORDER BY customer_id DESC LIMIT 5"; 
 
 		$query = $this->db->query($select_query);
  

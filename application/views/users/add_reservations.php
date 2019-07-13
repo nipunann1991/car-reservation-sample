@@ -10,7 +10,7 @@
 	<div class="container">
 
 		<div class="top-header">
-			<h2>Edit Reservation</h2>
+			<h2>Add Reservation</h2>
  
 		</div>
 
@@ -20,14 +20,14 @@
 
 			<div class="alert alert-success alert-dismissible d-none">
 			  <button type="button" class="close" data-dismiss="alert">&times;</button>
-			  <strong>Success!</strong> Reservation details updated successfully.
+			  <strong>Success!</strong> Reservation created successfully.
 			</div> 
 
 			<div class="row"> 
 
 				<div class="form-group col-md-9"> 
 				    <label for="customer_name">Customer Name</label>
-				    <select class="form-control" name="customer_name" disabled id="customer_name"> 
+				    <select class="form-control" name="customer_name" id="customer_name" disabled="disabled"> 
 					
 					</select> 
 				</div>   
@@ -37,12 +37,12 @@
 			<div class="row">
 				<div class="form-group col-md-4"> 
 					<label for="res_date">Reservation Start Date</label>
-			   		<input type="date" name="res_start_date" class="form-control" disabled id="res_start_date" /> 
+			   		<input type="date" name="res_start_date" class="form-control" id="res_start_date" /> 
 				</div>   
 				<div class="form-group col-md-4">
 				   
 					<label for="res_date">Reservation End Date</label>
-			   		<input type="date" name="res_end_date" class="form-control" disabled id="res_end_date" />
+			   		<input type="date" name="res_end_date" class="form-control" id="res_end_date" />
 				  
 				</div>  
 			</div> 
@@ -57,17 +57,17 @@
 				</div> 
 
 				<div class="form-group col-md-6">
-				    <label for="plate_no">Plate No</label>
+				   <!--  <label for="plate_no">Plate No</label>
 				    <select class="form-control" name="plate_no" id="plate_no"> 
 					
-					</select>
+					</select> -->
 				</div> 
 
 				<div class="form-group col-md-12">
-				    <label for="driver_name">Driver Name</label>
+				   <!--  <label for="driver_name">Driver Name</label>
 				    <select class="form-control" name="driver_name" id="driver_name"> 
 					
-					</select>
+					</select> -->
 				</div>
  
 
@@ -87,29 +87,17 @@
 				 
 				</div>
 
-				<div class="form-group col-md-12">
+				<div class="form-group col-md-6">
 				     <h4>Total Fare: Rs <span id="price">0</span></h4>
 				</div>
-
-				<div class="form-group col-md-6">
-					<div class="form-check">
-					    <input type="radio" class="form-check-input"  value="2" name="status" id="completed_trip">
-					    <label class="form-check-label" for="completed_trip">Mark as Completed Trip</label>
-					</div>
-
-					<div class="form-check">
-					    <input type="radio" class="form-check-input" value="0" name="status" id="cancel_trip">
-					    <label class="form-check-label" for="cancel_trip">Mark as Cancelled</label>
-					</div>
-				</div>
- 
-
+				
 			</div>
-		 
- 
-		  	<button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Edit Reservation </button> 
 
-		  	<a href="<?php echo base_url(); ?>index.php/reservations_controller/view_reservations" class="btn btn-secondary">Cancel</a> 
+			  
+		   
+		  	<button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Reservation </button> 
+
+		  	<a href="<?php echo base_url(); ?>index.php/user_controller/" class="btn btn-secondary">Cancel</a> 
 			 
 		</form>
 
@@ -125,8 +113,8 @@
 		var pricing_type = {}
 		var total = 0;
 		var pricing_value = 0;
-		var pricing_id = 0;  
-		var status = 1;
+		var pricing_id = 0;
+
 		/* Get car types */
 
 	    $.ajax({
@@ -173,6 +161,8 @@
 
     				$('#customer_name').append('<option value='+output.data[i].customer_id+'>'+output.data[i].f_name+' '+output.data[i].l_name+' - '+output.data[i].contact_no+'</option>') 
     			}  
+
+    			$('#customer_name').val('<?php echo $this->session->userdata['customer_id'] ?>');
     		}
 
     	})
@@ -209,72 +199,68 @@
     	});
 
 
-    	setTimeout(function(){
-			$.ajax({
-				url: '<?php echo base_url(); ?>index.php/reservations_controller/get_single_reservation_data',
-	    		type: 'POST', 
-	    		data: { res_id: getQueryVariable("res_id")},
-			})
-			.done(function(data) { 
-
-	 			var output = JSON.parse(data); 
-	 			console.log(output.data);
-
-
-	 			if (output.status == 200) {
-
-	 				
-					$('#customer_name').val(output.data.customer_id);
-					$('#res_start_date').val(output.data.res_date);
-					$('#res_end_date').val(output.data.res_end_date);
-					$('#res_end_date').val(output.data.res_end_date);
-					$('#driver_name').val(output.data.driver_id);
-					$('#car_type').val(output.data.car_type_id);
-					$('#pricing_type').val(output.data.pricing_type);
-					$('#res_qty').val(output.data.pricing_qty);
-
-					$('#price').val(output.data.pricing_qty); 
-
-					if(output.data.pricing_type == '1') {
-						$('#res_qty_label').html('No of Days');  
-						pricing_value = output.data.price_per_day;   
-
-					 }else if(output.data.pricing_type == '2'){
-						$('#res_qty_label').html('No of Hours');
-						pricing_value = output.data.price_per_hour;
-						
-					 }else{
-						$('#res_qty_label').html('No of Kms'); 
-						pricing_value = output.data.price_per_km; 
-					 }
-
-					total = parseInt(pricing_value) * parseInt(output.data.pricing_qty);
-					$('#price').html(total);  
-
-					 
-
-					$(".form-check-input[value='"+output.data.rstatus+"']").prop("checked", true);
-
-					selectCarPricing(output.data.car_type_id, output.data.car_id );
- 
-	 			}
-
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-
-    	},300)
-
-
 		
 		/* Get plate no by car type */
 
     	$('#car_type').on('change', function() {
-			selectCarPricing(this.value, '');
+
+		 	$.ajax({
+	    		url: '<?php echo base_url(); ?>index.php/car_controller/get_all_car_type_by_car_id_data',
+	    		type: 'POST',  
+	    		data: {car_type_id: this.value}
+	    	})
+	    	.done(function(data) {
+
+	    		var output = JSON.parse(data); 
+	    		 
+	    		if (output.status == 200) {  
+ 
+					$('#plate_no').html('');
+
+	    			for (var i = 0; i < output.data.length; i++) {
+ 
+	    				$('#plate_no').append('<option value='+output.data[i].car_id+'>'+output.data[i].plate_id+' - '+output.data[i].model+'</option>') 
+	    			}  
+	    		}
+
+	    	})
+	    	.fail(function() {
+	    		console.log("error");
+	    	}); 
+
+
+	    	/* Get Pricing By Car Id */
+
+	    	$.ajax({
+	    		url: '<?php echo base_url(); ?>index.php/pricing_controller/get_latest_pricing_by_car_type_data',
+	    		type: 'POST',  
+		    	data: {car_type_id: this.value}
+
+	    	})
+	    	.done(function(data) {
+
+	    		var output = JSON.parse(data);
+	    	 
+	    		 
+	    		if (output.status == 200) {   
+
+	    			pricing_type = {
+						price_per_day: output.data.price_per_day,
+						price_per_hour: output.data.price_per_hour,
+						price_per_km: output.data.price_per_km  
+					}  
+
+					pricing_id = output.data.pricing_id;
+
+					console.log(pricing_type, pricing_id)
+	    		}
+ 
+
+
+	    	})
+	    	.fail(function() {
+	    		console.log("error");
+	    	});
 
 		});
 		
@@ -296,14 +282,15 @@
 
 			total = pricing_value * parseInt($('#res_qty').val());
 			$('#price').html(total); 
-			
+			console.log(pricing_value) 
 
 		});
 
 
 
 		$('#res_qty').on('change', function() { 
-	 		total = pricing_value * parseInt($('#res_qty').val());
+
+			total = pricing_value * parseInt($('#res_qty').val());
 			$('#price').html(total);
 
 		});
@@ -312,10 +299,7 @@
 		$('#res_start_date').on('change', function() {  
 			 $('#res_end_date').val($('#res_start_date').val()) 
 		});
-		
-		$('.form-check-label[name="status"]').on('click', function(){
- 			status = $(this).val();
-    	});
+
 	
 
 		/* Get fuel types */
@@ -373,15 +357,15 @@
 	               valueNotEquals: "default" 
 	            },
 
-	            plate_no: {
-	             	required: true, 
-	               valueNotEquals: "default"
-	            },
+	            // plate_no: {
+	            //  	required: true, 
+	            //    valueNotEquals: "default"
+	            // },
 
-	            driver_name: {
-	            	valueNotEquals: "default",
-	                required: true, 
-	            },
+	            // driver_name: {
+	            // 	valueNotEquals: "default",
+	            //     required: true, 
+	            // },
 
 	            pricing_type: {
 	            	valueNotEquals: "default",
@@ -390,38 +374,33 @@
 	        }, 
 
 	        submitHandler: function(form) { 
-
-
-	        	if($('.form-check-input').is(':checked')) { 
-	        		status = $('.form-check-input[name="status"]:checked ').val(); 
-
-	        	}
  
 	        	var data = { 
-	        		res_id: getQueryVariable("res_id"),
 					res_date: $('#res_start_date').val(),
 					res_end_date: $('#res_end_date').val(),
 					customer_id: $('#customer_name').val(),
-					car_id: $('#plate_no').val(),
-					driver_id: $('#driver_name').val(),
+					car_type_id: $('#car_type').val(),
 					pricing_id: pricing_id,
 					pricing_type: $('#pricing_type').val(),
 					pricing_qty: $('#res_qty').val(),
 					total_price: total,
-					status: status,
+					status: -1,
 	        	}
-
+ 
 	        	$.ajax({
-	        		url: '<?php echo base_url(); ?>index.php/reservations_controller/edit_reservation_data',
+	        		url: '<?php echo base_url(); ?>index.php/reservations_controller/add_reservations_data',
 	        		type: 'POST', 
 	        		data: data,
 	        	})
-	        	.done(function(data) { 
- 					console.log(data)
+	        	.done(function(data) {
+
+	        		$('#add_car_type').val('');
+ 					
  					var output = JSON.parse(data);
 	        		 
 	        		if (output.status == 200) { 
-	        			$('.alert-success').removeClass('d-none');   
+	        			$('.alert-success').removeClass('d-none'); 
+	        			$('#myform')[0].reset();
 	        		}
 
 	        	})
@@ -432,79 +411,6 @@
 			}
 
 	    });
-
-
-	    function getQueryVariable(variable){
-	       var query = window.location.search.substring(1);
-	       var vars = query.split("&");
-	       for (var i=0;i<vars.length;i++) {
-	               var pair = vars[i].split("=");
-	               if(pair[0] == variable){return pair[1];}
-	       }
-	       return(false);
-		} 
-
-
-		function selectCarPricing(car_type_id, car_id){
-			$.ajax({
-	    		url: '<?php echo base_url(); ?>index.php/car_controller/get_all_car_type_by_car_id_data',
-	    		type: 'POST',  
-	    		data: {car_type_id: car_type_id}
-	    	})
-	    	.done(function(data) {
-
-	    		var output = JSON.parse(data); 
-	    		 
-	    		if (output.status == 200) {  
- 
-					$('#plate_no').html('');
-
-	    			for (var i = 0; i < output.data.length; i++) {
- 
-	    				$('#plate_no').append('<option value='+output.data[i].car_id+'>'+output.data[i].plate_id+' - '+output.data[i].model+'</option>') 
-	    			}  
-
-	    			$('#plate_no').val(car_id);
-	    		}
-
-	    	})
-	    	.fail(function() {
-	    		console.log("error");
-	    	}); 
-
-
-	    	/* Get Pricing By Car Id */
-
-	    	$.ajax({
-	    		url: '<?php echo base_url(); ?>index.php/pricing_controller/get_latest_pricing_by_car_type_data',
-	    		type: 'POST',  
-		    	data: {car_type_id: car_type_id}
-
-	    	})
-	    	.done(function(data) {
-
-	    		var output = JSON.parse(data);
-	    	 
-	    		 
-	    		if (output.status == 200) {   
-
-	    			pricing_type = {
-						price_per_day: output.data.price_per_day,
-						price_per_hour: output.data.price_per_hour,
-						price_per_km: output.data.price_per_km  
-					}  
-
-					pricing_id = output.data.pricing_id;
- 
-	    		}
- 
-
-
-	    	})
-	    	.fail(function() {
-	    		console.log("error");
-	    	});
-		}
 
    	});
 

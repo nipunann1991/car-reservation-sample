@@ -37,6 +37,25 @@ class home_model extends CI_Model {
 		return $query->result()[0]->value;
 	}
 
+	public function get_monthly_income(){
+
+	 	$select_query = "SELECT SUM(total_price) AS value FROM reservations WHERE status = 2"; 
+		$query = $this->db->query($select_query);
+
+		return $query->result()[0]->value;
+	}
+
+
+	public function get_pending_income(){
+
+	 	$select_query = "SELECT SUM(total_price) AS value FROM reservations WHERE status = 1"; 
+		$query = $this->db->query($select_query);
+
+		return $query->result()[0]->value;
+	}
+
+	
+
 
 	public function get_login_data($data){
  

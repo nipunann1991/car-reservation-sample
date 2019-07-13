@@ -378,10 +378,12 @@
 					res_end_date: $('#res_end_date').val(),
 					customer_id: $('#customer_name').val(),
 					car_id: $('#plate_no').val(),
+					car_type_id: $('#car_type').val(),
 					driver_id: $('#driver_name').val(),
 					pricing_id: pricing_id,
 					pricing_type: $('#pricing_type').val(),
 					pricing_qty: $('#res_qty').val(),
+					total_price: total,
 					status: 1,
 	        	}
  

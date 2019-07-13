@@ -31,10 +31,12 @@ class reservations_controller extends CI_Controller {
 			'res_end_date' => $this->input->post('res_end_date'),
 			'customer_id' => $this->input->post('customer_id'),
 			'car_id' => $this->input->post('car_id'),  
+			'car_type_id' => $this->input->post('car_type_id'),   
 			'driver_id' => $this->input->post('driver_id'),  
 			'pricing_id' => $this->input->post('pricing_id'),  
 			'pricing_type' => $this->input->post('pricing_type'),  
 			'pricing_qty' => $this->input->post('pricing_qty'),  
+			'total_price' => $this->input->post('total_price'),   
 			'status' => $this->input->post('status'),  
 			 
 		);
@@ -47,6 +49,8 @@ class reservations_controller extends CI_Controller {
 	 	return $output;
   
 	}
+
+	 
 
 	public function get_all_reservations_data(){   
 
@@ -73,7 +77,54 @@ class reservations_controller extends CI_Controller {
   
 	}
 
+	public function get_reservation_data_by_customer(){  
 
+		$data = array(
+			'customer_id' => $this->input->post('customer_id'),
+			'res_date' => date("Y-m-d")
+		);
+
+		$result = $this->reservations_model->get_reservation_data_by_customer($data); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+	public function get_previous_trips_by_customer(){  
+
+		$data = array(
+			'customer_id' => $this->input->post('customer_id'),
+			'res_date' => date("Y-m-d")
+		);
+
+		$result = $this->reservations_model->get_previous_trips_by_customer($data); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+	public function get_pendiing_approval_by_customer(){  
+
+		$data = array(
+			'customer_id' => $this->input->post('customer_id'), 
+		);
+
+		$result = $this->reservations_model->get_pendiing_approval_by_customer($data); 
+
+		$set_json_output = json_encode($result,JSON_PRETTY_PRINT); 
+		$output =  $this->output->set_output($set_json_output);
+
+	 	return $output;
+  
+	}
+
+		
 	public function edit_reservation_data(){  
 
 		$data_vals = array(
@@ -85,6 +136,7 @@ class reservations_controller extends CI_Controller {
 			'pricing_id' => $this->input->post('pricing_id'),  
 			'pricing_type' => $this->input->post('pricing_type'),  
 			'pricing_qty' => $this->input->post('pricing_qty'),  
+			'total_price' => $this->input->post('total_price'), 
 			'status' => $this->input->post('status'),  
 		);
 

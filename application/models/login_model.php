@@ -33,8 +33,7 @@ class login_model extends CI_Model {
 
 	public function get_login_data($data){
 
-		 
-
+		  
 	 	$select_query = "SELECT * FROM `user` WHERE `u_email`='".$data['email']."' and `u_password`='".$data['password']."'"; 
 		$query = $this->db->query($select_query);
 
@@ -58,6 +57,100 @@ class login_model extends CI_Model {
 			return $output;
 		}
 	} 
+
+
+	public function insert_customer_data($data){
+ 
+		$values = "'" . implode("','", $data) . "'";
+
+		$insert_query = "INSERT INTO `customers`(`f_name`, `l_name`, `email_addr`, `address`, `nic`, `contact_no`, `status`) VALUES (".$values.");";
+
+		$query = $this->db->query($insert_query);
+
+		$insert_id = $this->db->insert_id(); 
+
+
+		if ($query) {
+
+			$output = array(
+				'status' => 200,  
+				'message' => $insert_id, 
+			);
+
+			return $output;
+			 
+
+		}else{
+			 
+
+			if ($this->db->error()['code'] == '1062') {
+
+				$output = array(
+					'status' => 500,  
+					'message' => "Duplicate entry", 
+				);
+				 
+			}else{
+
+				$output = array(
+					'status' => 404,  
+					'message' => "Data Inserted Faild", 
+				);
+
+			}
+
+			
+
+			return $output;  
+		}
+ 
+	}
+
+
+	public function insert_user_login($data){
+ 
+		$values = "'" . implode("','", $data) . "'";
+
+		$insert_query = "INSERT INTO `user`(`customer_id`, `u_fname`, `u_lname`, `u_email`, `u_password`, `u_role`) VALUES (".$values.");";
+
+		$query = $this->db->query($insert_query);
+
+ 
+		if ($query) {
+
+			$output = array(
+				'status' => 200,  
+				'message' => "Data Inserted Successfully", 
+			);
+
+			return $output;
+			 
+
+		}else{
+			 
+
+			if ($this->db->error()['code'] == '1062') {
+
+				$output = array(
+					'status' => 500,  
+					'message' => "Duplicate entry", 
+				);
+				 
+			}else{
+
+				$output = array(
+					'status' => 404,  
+					'message' => "Data Inserted Faild", 
+				);
+
+			}
+
+			
+
+			return $output;  
+		}
+ 
+	}
 	
 }
 
